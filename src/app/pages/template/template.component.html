@@ -11,9 +11,14 @@
         <input class="form-control"
                type="text"
                name="nombre"
-               ngModel 
+               [ngModel] = "usuario.nombre"
+               [class.is-invalid] = "nombre.invalid && nombre.touched"
                required
-               placeholder="Nombre">
+               minlength="3"
+               placeholder="Nombre"
+               #nombre="ngModel">
+        <small *ngIf="nombre.invalid && nombre.touched"
+                class="form-text text-danger">Debe ingresar al menos tres letras</small>
       </div>
     </div>
 
@@ -23,7 +28,15 @@
 
         <input class="form-control"
                type="text"
+               name="apellido"
+               required
+               [ngModel] = "usuario.apellido"
+               minlength="3"
+               [class.is-invalid] = "apellido.invalid && apellido.touched"
+               #apellido="ngModel"
                placeholder="Apellido">
+        <small *ngIf="apellido.invalid && apellido.touched"
+                class="form-text text-danger">Debe ingresar al menos tres letras</small>
       </div>
     </div>
 
@@ -35,7 +48,15 @@
 
       <input class="form-control"
              type="email"
-             placeholder="Correo electrónico">
+             placeholder="Correo electrónico"
+             name="correo"
+             required
+             [ngModel]="usuario.email"
+             [class.is-invalid] = "correo.invalid && correo.touched"
+             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+             #correo = "ngModel">
+      <small *ngIf="correo.invalid && correo.touched"
+            class="form-text text-danger">El correo electronico no es valido</small>
     </div>
   </div>
 

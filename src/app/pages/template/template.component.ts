@@ -8,13 +8,25 @@ import { NgForm } from '@angular/forms';
 })
 export class TemplateComponent implements OnInit {
 
+  usuario = {
+    nombre: '',
+    apellido: '',
+    email : ''
+  }
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
   guardar(form: NgForm ) {
-    console.log(form)
+    console.log(form.value)
+    if (form.invalid) {
+      Object.values(form.controls).forEach(control => {
+
+        control.markAsTouched();
+      })
+    }
   }
 
 }
